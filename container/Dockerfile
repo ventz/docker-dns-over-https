@@ -7,6 +7,6 @@ RUN cpanm --sudo Net::DNS::Nameserver
 RUN cpanm --sudo WWW::Mechanize
 RUN cpanm --sudo JSON::XS
 
-COPY dns-relay-over-https.pl /
+COPY entrypoint.pl /
 
-CMD ["/dns-relay-over-https.pl"]
+ENTRYPOINT ["/entrypoint.pl"]
