@@ -51,7 +51,7 @@ sub dns_over_https {
     
     my $decoded_response = decode_json($result);
     my $status = $decoded_response->{'Status'};
-    my @items = $decoded_response->{'Answer'}[0];
+    my @items = @{$decoded_response->{'Answer'}}; 
     if($status == 0) {
         $rcode = "NOERROR";
         for my $answer (@items) {
@@ -60,7 +60,7 @@ sub dns_over_https {
             my $ttl = $answer->{'TTL'};
             my $rdata = $answer->{'data'};
 
-			# https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml#dns-parameters-4 
+            # https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml#dns-parameters-4 
             if($qtype == 1) { $qtype = 'A'; }                                                       
             elsif($qtype == 2) { $qtype = 'NS'; }                                                   
             elsif($qtype == 5) { $qtype = 'CNAME'; }                                                
