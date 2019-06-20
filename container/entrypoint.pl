@@ -19,7 +19,7 @@ if($input && ($input eq 'google')) {
 }
 my $ip = $ARGV[1];
 if($ip && ($ip == 6)) {
-    our $listen = ['0.0.0.0', '::'];
+    $listen = ['0.0.0.0', '::'];
 }
 
 print STDERR "\n=> Provider Selected for DNS-over-HTTPS backend: $provider\n\n";
