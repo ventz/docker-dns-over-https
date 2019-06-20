@@ -11,11 +11,17 @@ use JSON::XS;
 # By default we use "CloudFlare" as our HTTPS->DNS backend.
 # Users may override this by passing "google" as an argument
 our $provider = 'cloudflare';
+our $listen = ['0.0.0.0'];
 
 my $input = $ARGV[0];
 if($input && ($input eq 'google')) {
 	$provider = 'google';
 }
+my $ip = $ARGV[1];
+if($ip && ($ip == 6)) {
+    our $listen = ['0.0.0.0', '::'];
+}
+
 print STDERR "\n=> Provider Selected for DNS-over-HTTPS backend: $provider\n\n";
 
 sub reply_handler {
@@ -81,7 +87,7 @@ sub dns_over_https {
 
 
 my $ns = new Net::DNS::Nameserver(
-    LocalAddr    => [ '0.0.0.0' ],
+    LocalAddr    => $listen,
     LocalPort    => 53,
     ReplyHandler => \&reply_handler,
     Verbose      => 0

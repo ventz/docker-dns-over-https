@@ -1,6 +1,6 @@
 # What is "DNS over HTTPS"
 
-## Last Updated: 11-30-2018 - lots of features!
+## Last Updated: 6-20-2019 - lots of features!
 
 A very small (268 MB) and lightweight DNS server which responds to standard DNS (see supported resource records) queries on the front-end via tcp+udp 53, and it looks them up via HTTPS on the back-end, using one of two choices:
 
@@ -41,6 +41,31 @@ docker run -it -d \
     -p 53:53 \
 ventz/dns-over-https google
 ```
+
+# How to run the "DNS over HTTPS" with IPv6 support?
+
+You can add '6' as a second parameter after the now required backend provider input:
+
+1.) CloudFlare IPv6 Support:
+```
+docker run -it -d \
+    --restart=always \
+    -p 53:53/udp \
+    -p 53:53 \
+ventz/dns-over-https cloudflare 6
+```
+
+or
+
+2.) Google IPv6 Support:
+```
+docker run -it -d \
+    --restart=always \
+    -p 53:53/udp \
+    -p 53:53 \
+ventz/dns-over-https google 6
+```
+
 
 # How to use it?
 After you run the service (see above: "DNS over HTTPS"), you can manually test:
