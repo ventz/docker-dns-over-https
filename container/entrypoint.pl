@@ -57,7 +57,9 @@ sub dns_over_https {
     
     my $decoded_response = decode_json($result);
     my $status = $decoded_response->{'Status'};
-    my @items = @{$decoded_response->{'Answer'}}; 
+    my @items;
+    # If you feed it a non-published TLD (ex: .lan or .non-existent), there will not be a "proper" answer
+    unless(not defined $decoded_response->{'Answer'}) {@items = @{$decoded_response->{'Answer'}}};
     if($status == 0) {
         $rcode = "NOERROR";
         for my $answer (@items) {
