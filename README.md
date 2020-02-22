@@ -1,6 +1,6 @@
 # What is "DNS over HTTPS"
 
-## Last Updated: 6-20-2019 - lots of features!
+## Last Updated: 2-22-2020
 
 A very small (268 MB) and lightweight DNS server which responds to standard DNS (see supported resource records) queries on the front-end via tcp+udp 53, and it looks them up via HTTPS on the back-end, using one of two choices:
 
